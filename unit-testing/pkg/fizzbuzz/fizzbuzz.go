@@ -1,8 +1,6 @@
 package fizzbuzz
 
-import (
-	"strconv"
-)
+import "strconv"
 
 // FizzBuzz performs a FizzBuzz operation over a range of integers
 //
@@ -14,21 +12,24 @@ import (
 // - Return the original number if is is not divisible by either the `fizzAt` or
 //   the `buzzAt` values.
 func FizzBuzz(total, fizzAt, buzzAt int64) []string {
-	result := make([]string, total)
+	result := []string{}
 
 	for i := int64(1); i <= total; i++ {
 		if !(i%fizzAt == 0) && !(i%buzzAt == 0) {
-			result[i-1] = strconv.FormatInt(i, 10)
+			result = append(result, strconv.FormatInt(i, 10))
 			continue
 		}
 
+		str := ""
 		if i%fizzAt == 0 {
-			result[i-1] = "Fizz"
+			str = "Fizz"
 		}
 
 		if i%buzzAt == 0 {
-			result[i-1] += "Buzz"
+			str += "Buzz"
 		}
+
+		result = append(result, str)
 	}
 
 	return result

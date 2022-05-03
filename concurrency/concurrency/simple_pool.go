@@ -15,5 +15,23 @@ type SimplePool interface {
 // concurrent tasks to run at any one time. maxConcurrent must be greater than
 // zero.
 func NewSimplePool(maxConcurrent int) SimplePool {
-	panic("TODO")
+	ch := make(chan func())
+	for i := 0; i < maxConcurrent; i++ {
+		go worker(ch)
+	}
+	return &simplePool{ch: ch}
+}
+
+type simplePool struct {
+	ch chan func()
+}
+
+func (s simplePool) Submit(f func()) {
+	s.ch <- f
+}
+
+func worker(ch chan func()) {
+	for f := range ch {
+		f()
+	}
 }

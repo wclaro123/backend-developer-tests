@@ -5,7 +5,7 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/stackpath/backend-developer-tests/unit-testing/pkg/fizzbuzz"
+	"github.com/wclaro123/stackpath/backend-developer-tests/unit-testing/pkg/fizzbuzz"
 )
 
 func main() {
